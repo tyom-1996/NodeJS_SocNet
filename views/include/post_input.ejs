@@ -1,0 +1,453 @@
+
+<style>
+    .upload_image_btn,.upload_video_btn,.upload_audio_btn,.start_webcam{
+        padding: 0 9px!important;
+        border-radius: 2em!important;
+        height: 32px!important;
+        transition: all 0.15s!important;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif;
+        font-weight: 500!important;
+        font-size: 13px!important;
+        text-overflow: ellipsis!important;
+        white-space: nowrap!important;
+        line-height: 28px!important;
+        background: #f3f3f3!important;
+        width: auto!important;
+        margin-bottom: 5px;
+    }
+
+    .upload_image_btn img,.upload_video_btn img,.upload_audio_btn svg,.start_webcam img{
+        width: 20px;
+        height: 20px;
+        margin-right:7px;
+        margin-top: -1px;
+        border-radius: 3px;
+        object-fit: cover;
+    }
+
+    #publisher-button:hover {
+        color: #ffffff;
+        background-color: #2e7be5;
+        border-color: #2e7be5;
+    }
+
+    #image-holder img{
+        width: 115px!important;
+        margin: 5px!important;
+
+    }
+
+
+    #image-holder #camera_img{
+        width: 50%!important;
+        height: 100%;
+        display: block;
+    }
+
+    .snap_shot,.close_video_bl{
+        width: 30px;
+        height: 30px;
+        background: #2e7be5;
+        box-shadow: 0 0 0px 4px white;
+        border-radius: 50%;
+        /*position: absolute;*/
+        /*bottom: 5vh;*/
+        /*right: 0;*/
+        /*left: 0;*/
+        cursor: pointer;
+        /*margin: auto;*/
+        margin: 0 5px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .camera_btn_block{
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 15px;
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    .snap_shot i:hover{
+        color: silver;
+    }
+    .snap_shot{
+        margin-right: 20px;
+    }
+
+    #video_bl{
+        width: 92%;
+        margin: auto;
+        position: relative;
+        overflow: hidden;
+        max-height: 402px;
+        height: auto;
+        background: white;
+    }
+    
+    @media (max-width:1230px) {
+        #video_bl{
+            background: black;
+        }
+    }
+</style>
+
+<!-- .home-announcement -->
+<form action="/post/new_post" method="post" class="post publisher-box" id="publisher-box-focus" enctype="multipart/form-data">
+    <div class="panel panel-white post panel-shadow">
+        <div id="post-textarea" >
+            <img class="post-avatar" src="<%= user.profil_photo%>">
+            <i class="fa fa-spinner fa-spin" id="loading_indicator"></i>
+            <textarea id="post_textarea"  name="text" class="form-control postText ui-autocomplete-input" cols="10" rows="3"
+            placeholder="What's going on? #Hashtag.. @Mention.." dir="auto" autocomplete="off"></textarea>
+
+            <!--Add Image-->
+            <div class="poster-left-buttons camera-button" >
+                <div class="input-group">
+                    <span class="btn btn-default btn-file" id="camera-button-btn" onclick="document.getElementById('publisher-photos').click(); return false">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera" color="#5b5b5b">
+                          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                          <circle cx="12" cy="13" r="4"></circle>
+                       </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    <!--UPLOAD CAMERA PHOTO-->
+
+        <div style="display: block;" class="publisher-hidden-option" >
+
+            <div style="position: relative;" id="video_bl">
+
+             <video style="display: none;width: 100%;"  width=400 height=400 id="video"  autoplay></video>
+                <input id="publisher-camera" type="hidden" name="my_post">
+
+
+        <div class="camera_btn_block">
+
+            <div class="snap_shot" >
+                <i class="fas fa-camera" style="font-size: 20px;display: block; color: white;"></i>
+            </div>
+
+            <div class="close_video_bl" >
+                <i class="fas fa-times-circle close_video" style="font-size: 20px;display: block; color: white;"></i>
+            </div>
+
+        </div>
+
+            </div>
+            <canvas style="display: none"  id="myCanvas" width="400" height="350"></canvas>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <!--Uploaded Video-->
+        <div class="publisher-hidden-option" id="video-form">
+            <div class="inner-addon left-addon">
+                                 <span class="pull-left" style="width: 100%;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video">
+                                       <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                       <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                    </svg>
+                                    <input style="width: 100%;" name="videocount" type="text" class="form-control bg_read_input" readonly="">
+                                 </span>
+                <!--  <span class="pull-right pointer video-custom-thumb">
+                 Custom Thumbnail&nbsp;<i class="fa fa-caret-down"></i>
+                 </span> -->
+            </div>
+            <div class="video-poster-image">
+                <div class="thumb-renderer pointer" onclick="$('#custom-video-thumb').trigger('click');">
+                    <div id="post_vthumb_droparea">
+                        <div class="preview">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud" color="#384047">
+                                <polyline points="16 16 12 12 8 16"></polyline>
+                                <line x1="12" y1="12" x2="12" y2="21"></line>
+                                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                                <polyline points="16 16 12 12 8 16"></polyline>
+                            </svg>
+                            <div class="error-text-renderer"></div>
+                            <div>
+                                <p>Drop Image Here OR Browse To Upload</p>
+                            </div>
+                        </div>
+                        <div class="image"></div>
+                    </div>
+                </div>
+            </div>
+            <input type="file" class="hidden" name="video_thumb" id="custom-video-thumb" accept="image/*">
+        </div>
+        <!--Uploaded Audio-->
+        <div class="publisher-hidden-option" id="music-form">
+            <div class="inner-addon left-addon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-music">
+                    <path d="M9 17H5a2 2 0 0 0-2 2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm12-2h-4a2 2 0 0 0-2 2 2 2 0 0 0 2 2h2a2 2 0 0 0 2-2z"></path>
+                    <polyline points="9 17 9 5 21 3 21 15"></polyline>
+                </svg>
+                <input name="musiccount" type="text" class="form-control bg_read_input" readonly="">
+            </div>
+        </div>
+        <!--Poll Options-->
+        <div id="poll-form">
+            <div class="publisher-hidden-option answers">
+                <input name="answer[]" type="text" class="form-control" placeholder="Answer 1">
+                <input name="answer[]" type="text" class="form-control" placeholder="Answer 2">
+            </div>
+            <div class="create-poll" onclick="Wo_AddAnswer();" id="add_answer">
+                <div class="create-text">Add answer</div>
+            </div>
+        </div>
+        <!--Create Album-->
+        <div style="position:relative;">
+            <div id="album-form">
+                <div class="publisher-hidden-option">
+                    <input name="album_name" type="text" class="form-control" placeholder="Album name">
+                </div>
+            </div>
+            <div class="publisher-hidden-option" id="photo-form">
+                <div class="inner-addon left-addon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <input name="phtoscount" type="text" class="form-control bg_read_input" readonly="">
+                </div>
+                <!--  <div class="create-album pull-right" onclick="Wo_OpenAlbum();">
+                    <div class="create-text">Create album</div>
+                 </div> -->
+                <div class="clear"></div>
+                <div style="overflow-x: auto;">
+
+
+
+
+
+                    <div id="image-holder"></div>
+                </div>
+            </div>
+        </div>
+        <!--Uploaded File-->
+        <div class="publisher-hidden-option" id="file-form">
+            <div class="inner-addon left-addon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                    <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+                <input name="filename" type="text" class="form-control bg_read_input" readonly="">
+            </div>
+        </div>
+        <!--Set Location-->
+        <div class="publisher-hidden-option" id="map-form">
+            <div class="inner-addon left-addon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <input name="postMap" id="searchTextField" type="text" class="form-control" placeholder="Where are you ?">
+            </div>
+        </div>
+        <!--Add Emojis-->
+        <div id="emo-form">
+            <div class="publisher-hidden-option" style="border-top: 1px dashed #ededed;">
+                <div class="feelings-type-to pull-left pointer" onclick="Wo_RestFeelings();"></div>
+                <span class="feelings-value"></span>
+                <input name="feeling" id="feelings-text" type="text" class="form-control bg_read_input" placeholder="What are you doing ?" onclick="Wo_ShowFeelings();" autocomplete="no">
+                <input name="feeling_type" type="hidden" id="feeling-type" value="">
+                <div class="clear"></div>
+            </div>
+            <div class="feeling-type feeling-types">
+                <ul>
+                    <li class="pointer" onclick="Wo_ShowFeelingType(&quot;feelings&quot;, &quot;Feeling&quot;, &quot;What are you feeling ?&quot;);">
+                        <svg fill="#009da0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" class="feather feather-user-plus">
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"></path>
+                        </svg>
+                        <span>Feeling</span>
+                    </li>
+                    <li class="pointer" onclick="Wo_ShowFeelingType(&quot;traveling&quot;, &quot;Traveling to&quot; , &quot;Where are you traveling ?&quot;);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase" color="#3F51B5">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                        <span>Traveling to</span>
+                    </li>
+                    <li class="pointer" onclick="Wo_ShowFeelingType(&quot;watching&quot;, &quot;Watching&quot;, &quot;What are you watching ?&quot;);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tv" color="#E91E63">
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                            <polyline points="17 2 12 7 7 2"></polyline>
+                        </svg>
+                        <span>Watching</span>
+                    </li>
+                    <li class="pointer" onclick="Wo_ShowFeelingType(&quot;playing&quot;, &quot;Playing&quot;, &quot;What are you Playing ?&quot;);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target" color="#FF9800">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                        <span>Playing</span>
+                    </li>
+                    <li class="pointer" onclick="Wo_ShowFeelingType(&quot;listening&quot;, &quot;Listening to&quot;, &quot;What are you Listening to ?&quot;);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-headphones" color="#03A9F4">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                        </svg>
+                        <span>Listening to</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="feeling-type feelings">
+                <ul>
+                    <li class="pointer" onclick="Wo_AddFeeling('happy', 'Happy', 'smile');"><i class="twa-lg twa twa-smile"></i> Happy</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('loved', 'Loved', 'heart-eyes');"><i class="twa-lg twa twa-heart-eyes"></i> Loved</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('sad', 'Sad', 'disappointed');"><i class="twa-lg twa twa-disappointed"></i> Sad</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('so_sad', 'Very sad', 'sob');"><i class="twa-lg twa twa-sob"></i> Very sad</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('angry', 'Angry', 'angry');"><i class="twa-lg twa twa-angry"></i> Angry</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('confused', 'Confused', 'confused');"><i class="twa-lg twa twa-confused"></i> Confused</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('smirk', 'Hot', 'smirk');"><i class="twa-lg twa twa-smirk"></i> Hot</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('broke', 'Broken', 'broken-heart');"><i class="twa-lg twa twa-broken-heart"></i> Broken</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('expressionless', 'expressionless', 'expressionless');"><i class="twa-lg twa twa-expressionless"></i> expressionless</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('cool', 'Cool', 'sunglasses');"><i class="twa-lg twa twa-sunglasses"></i> Cool</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('funny', 'Funny', 'joy');"><i class="twa-lg twa twa-joy"></i> Funny</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('tired', 'Tired', 'tired-face');"><i class="twa-lg twa twa-tired-face"></i> Tired</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('lovely', 'Lovely', 'heart');"><i class="twa-lg twa twa-heart"></i> Lovely</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('blessed', 'Blessed', 'innocent');"><i class="twa-lg twa twa-innocent"></i> Blessed</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('shocked', 'Shocked', 'scream');"><i class="twa-lg twa twa-scream"></i> Shocked</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('sleepy', 'Sleepy', 'sleeping');"><i class="twa-lg twa twa-sleeping"></i> Sleepy</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('pretty', 'Pretty', 'relaxed');"><i class="twa-lg twa twa-relaxed"></i> Pretty</li>
+                    <li class="pointer" onclick="Wo_AddFeeling('bored', 'Bored', 'unamused');"><i class="twa-lg twa twa-unamused"></i> Bored</li>
+                </ul>
+            </div>
+        </div>
+        <!--Add Stickers-->
+        <div id="gif-form">
+            <div class="w100" id="publisher-box-stickers">
+                <input type="text" class="form-control" style="border: none;" placeholder="Search GIFs" onkeyup="Wo_GetPostStickers(this.value)">
+                <div class="ball-pulse pull-right" style="margin: -33px 10px 0px 0px;">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div id="publisher-box-stickers-cont"></div>
+            </div>
+        </div>
+        <div id="results"></div>
+        <!--Progress Bar-->
+        <div class="publisher-hidden-option">
+            <div id="progress">
+                <span id="percent" class="pull-right">0%</span>
+                <div class="progress">
+                    <div id="bar" class="progress-bar active"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+
+        <!--Publisher Box Footer-->
+        <div class="publisher-box-footer">
+            <div class="row pub-footer-upper">
+                <!--Uploaded Image-->
+                <div class="pull-left">
+                    <div class="poster-left-buttons">
+                        <div class="input-group">
+                              <span class="btn btn-file upload_image_btn">
+                               <i class="fas fa-images" style=" font-size: 19px; color: #4d91ea;    margin-right: 6px;"></i>
+                                       Images
+                                     <!--<input type="file" id="publisher-photos" accept="image/x-png, image/gif, image/jpeg" name="postPhotos[]" multiple="multiple">-->
+                                  <input id="publisher-photos" type="file" name="my_post" accept="image/jpeg,image/png,image/gif" multiple/>
+                              </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pull-left">
+                    <div class="poster-left-buttons">
+                        <div class="input-group">
+                              <span class="btn btn-file start_webcam">
+                                    <img src="https://demo.wowonder.com/themes/sunshine/img/icons/pub-img.svg" alt="Upload Images" >
+                                      Camera
+                              </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--Uploaded Video-->
+                <div class="pull-left">
+                    <div class="poster-left-buttons">
+                        <div class="input-group">
+                              <span class="btn btn-file upload_video_btn" >
+                                 <img src="https://demo.wowonder.com/themes/sunshine/img/icons/pub-vid.svg" alt="Upload Video" >
+                                  Video
+                                  <!--<input type="file" id="publisher-video" name="postVideo" accept="video/*">-->
+                                  <input id="publisher-video" type="file" name="my_post"  accept="video/*" multiple/>
+                              </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--Uploaded Music-->
+                <div class="pull-left">
+                    <div class="poster-left-buttons">
+                        <div class="input-group">
+                              <span class="btn btn-file upload_audio_btn">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+ <path fill="#3f51b5" d="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z">
+     </path></svg> Audio<input id="publisher-music" type="file" name="my_post"  accept="audio/*" multiple/>
+                              </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pub-footer-bottom">
+                <div class="pull-right">
+                    <button type="submit"  id="publisher-button" class="btn btn-main">
+                        <span>Share</span>
+                    </button>
+                </div>
+                <div class="pull-right">
+                    <div class="ball-pulse">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div id="status"></div>
+                <div class="pull-left">
+                    <div class="poster-left-select">
+                        <div class="publisher-hidden-option inputsm">
+                            <select name="postPrivacy" class="form-control inputsm">
+                                <option value="0">Only me</option>
+                                <option value="1">Me and my friends</option>
+                                <option value="2" selected="">Everyone</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-left charsLeft-post"><span id="charsLeft">5000</span></div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="hash_id" value="d2a8a1bde5eba1942d457a555cf2c0dc034aacd8">
+    <input type="hidden" name="postRecord" value="" id="postRecord">
+    <input type="hidden" name="postSticker" value="" id="postSticker" onchange="alert(this.value)">
+</form>

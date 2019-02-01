@@ -1,0 +1,113 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Video-only Example - Record Plugin for Video.js</title>
+
+    <link href="https://vjs.zencdn.net/7.4.1/video-js.min.css" rel="stylesheet">
+    <link href="https://collab-project.github.io/videojs-record/dist/css/videojs.record.min.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/7.4.1/video.min.js"></script>
+    <script src="https://webrtcexperiment-webrtc.netdna-ssl.com/RecordRTC.js"></script>
+    <script src="https://unpkg.com/webrtc-adapter@7.2.0/out/adapter.js"></script>
+    <script src="https://collab-project.github.io/videojs-record/dist/videojs.record.min.js"></script>
+    <script src="https://collab-project.github.io/videojs-record/examples/browser-workarounds.js"></script>
+
+    <style>
+        /* change player background color */
+        #myVideo {
+            background-color: #1a535c;
+        }
+    </style>
+</head>
+<body>
+
+<video id="myVideo" class="video-js vjs-default-skin">
+    <p class="vjs-no-js">
+        To view this video please enable JavaScript, or consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank">
+            supports HTML5 video.
+        </a>
+    </p>
+</video>
+<audio id = " myAudio " class = " video-js vjs-default-skin "> </audio>
+<button onclick="ajaxget()">get</button>
+<script>
+    var data
+        var options = {
+            controls: true,
+            width: 320,
+            height: 240,
+            fluid: false,
+            controlBar: {
+                volumePanel: false
+            },
+            plugins: {
+                record: {
+                    audio: false,
+                    video: true,
+                    maxLength: 30,
+                    debug: true
+                }
+            }
+        };
+
+        applyVideoWorkaround();
+
+        var player = videojs('myVideo', options, function() {
+            var msg = 'Using video.js ' + videojs.VERSION +
+            ' with videojs-record ' + videojs.getPluginVersion('record') +
+            ' and recordrtc ' + RecordRTC.version;
+            videojs.log(msg);
+        });
+
+        // error handling
+        player.on('deviceError', function() {
+            console.warn('device error:', player.deviceErrorCode);
+        });
+
+        player.on('startRecord', function() {
+            console.log('started recording!');
+        });
+
+        // user completed recording and stream is available
+        player.on('finishRecord', function() {
+        	// 				data = player.recordedData;
+            // console.log('finished recording: ', player.recordedData);
+            // player.record().saveAs({'video': 'my-video-file-name.webm'});
+            console.log('finished recording:', player.recordedData);
+            var data = player.recordedData;
+            var serverUrl = '/post/new_post';
+            var formData = new FormData();
+            formData.append('file', data, data);
+            console.log('uploading recording:', data.name);
+            console.log(data);
+
+
+
+            fetch(serverUrl, {
+                method: 'POST',
+                data:{data:formData}
+            }).then(
+                success => console.log('recording upload complete.')
+            ).catch(
+                error => console.error('an upload error occurred!')
+            );
+        });
+
+        function ajaxget(){
+                $.ajax({
+                    url:'/post/new_post',
+                    type:'post',
+                    data:{data:JSON.stringify(data)},
+                    success:function(r){
+                        console.log(r)
+                    }
+                })
+        }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WoWonder Social Network Platform</title>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta name="title" content="WoWonder Social Network Platform">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/icon.png"/>
+    <link rel="stylesheet" href="css/login/general_style.css">
+    <link rel="stylesheet" href="css/login/welcome.css">
+    <link rel="stylesheet"
+          href="https://demo.wowonder.com/themes/default/stylesheet/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/register/register_validate.js"></script>
+    <link rel="stylesheet" href="css/register/register.css">
+</head>
+<body>
+<div id="focus-overlay"></div>
+<input type="hidden" class="main_session" value="aff1d574272e517bd5b9">
+<div class="content-container welcome-container" style="">
+    <div class="ad-placement-header-footer"></div>
+    <div id="contnet">
+        <div id="welcomeheader" class="navbar-default">
+            <div class="container">
+                <div class="logo pull-left">
+                    <a href="login"><img src="images/logo.png" alt="Logo"> </a>
+                </div>
+                <ul class="nav navbar-nav navbar-right pull-right">
+                    <li class="absul-right">
+                        <a class="mdbtn" href="login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="login fadeInUp animated animated_5" style="overflow:visible;">
+                <div class="col-md-5 wo_regi_features">
+                    <div class="wo_r_features fadeInUp animated animated_9">
+                        <ul>
+                            <li>
+						<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path
+                                        fill="#fbc222"
+                                        d="M7.5,21.5L8.85,20.16L12.66,23.97L12,24C5.71,24 0.56,19.16 0.05,13H1.55C1.91,16.76 4.25,19.94 7.5,21.5M16.5,2.5L15.15,3.84L11.34,0.03L12,0C18.29,0 23.44,4.84 23.95,11H22.45C22.09,7.24 19.75,4.07 16.5,2.5M6,17C6,15 10,13.9 12,13.9C14,13.9 18,15 18,17V18H6V17M15,9A3,3 0 0,1 12,12A3,3 0 0,1 9,9A3,3 0 0,1 12,6A3,3 0 0,1 15,9Z"/></svg>
+						Connect</span>
+                            </li>
+                            <li>
+						<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path
+                                        fill="#ff6d4c"
+                                        d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z"/></svg>
+						Share</span>
+                            </li>
+                            <li>
+						<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path
+                                        fill="#00aeb1"
+                                        d="M3,3H11V7.34L16.66,1.69L22.31,7.34L16.66,13H21V21H13V13H16.66L11,7.34V11H3V3M3,13H11V21H3V13Z"/></svg>
+						Discover</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <form id="register" class="fadeInUp animated animated_9" method="post"
+                          action="register/create_new_user">
+                        <p class="title">Sign up</p>
+                        <p class="error_p"></p>
+                        <p class="error_pass">
+                            <%= error%>
+                        </p>
+
+                        <div class="errors"></div>
+
+                        <input class="input_name" name="username" type="text" placeholder="Username" autofocus/>
+                        <input class="input_surname" name="surname" type="text" placeholder="Surname" autofocus="">
+                        <input class="input_email" name="email" type="email" placeholder="E-mail address"/>
+                        <input class="input_pass" name="password" type="password" placeholder="Password"/>
+                        <input class="input_pass_confirm" name="confirm_password" type="password"
+                               placeholder="Confirm Password"/>
+                        <select name="gender" id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <div class="terms">
+                            <input type="checkbox" name="accept_terms" id="accept_terms">
+                            <label for="accept_terms">
+                                By creating your account, you agree to our <a href="">Terms of Use</a> & <a href="">Privacy
+                                    Policy</a>
+                            </label>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="login_signup_combo">
+                            <div class="signup__">
+                                <a class="dec" href="login">Login</a>
+                            </div>
+                            <div class="login__">
+                                <svg class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                    <circle class="spinner__path" fill="none" stroke-width="7" stroke-linecap="round"
+                                            cx="33" cy="33" r="29"></circle>
+                                </svg>
+                                <button type="submit" class="btn btn-main" id="sign_submit">Let&#039;s Go!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="welcome-footer pull-left">
+                <a data-ajax="?link1=terms&type=terms" href="https://demo.wowonder.com/terms/terms">Terms of Use</a>
+                <a data-ajax="?link1=terms&type=privacy-policy" href="https://demo.wowonder.com/terms/privacy-policy">Privacy
+                    Policy</a>
+                <a data-ajax="?link1=contact-us" href="https://demo.wowonder.com/contact-us">Contact Us</a>
+                <a data-ajax="?link1=terms&type=about-us" href="https://demo.wowonder.com/terms/about-us">About</a>
+                <a href="https://demo.wowonder.com/blogs">Blog</a>
+
+            </div>
+            <div class="welcome-footer-right pull-right">
+                © 2018 WoWonder
+            </div>
+        </div>
+
+    </div>
+    <footer>
+    </footer>
+    <div class="second-footer">
+    </div>
+    <div class="extra">
+    </div>
+</div>
+<!-- Load modal alerts -->
+<div class="modal fade in" id="comment_report_box" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 16px;">
+                <i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
+                <span class="msg">Comment reported successfully.</span>
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade in" id="post-shared" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 16px;">
+                <i class="fa fa-check" aria-hidden="true" style="color: green;"></i>
+                Post was successfully added to your timeline! </p>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade in" id="modal-alert" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 16px;">
+                <i class="fa fa-info-circle" aria-hidden="true" style="color: #31708f;"></i>
+                <span id="modal-alert-msg">
+            You have reached your limit of 5000 friends!          </span>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="modal fade in" id="invalid_file" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 14px;">
+                <i class="fa fa-info-circle main" aria-hidden="true" style="color:#f2dede;"></i>
+                File size error: The file exceeds allowed the limit (23 MB) and can not be uploaded. </p>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade in" id="file_not_supported" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <p style="text-align: center;padding: 30px 20px;font-family: Hind,Arial;font-size: 14px;">
+                <i class="fa fa-info-circle main" aria-hidden="true" style="color:#f2dede;"></i>
+                Unable to upload a file: This file type is not supported. </p>
+        </div>
+
+    </div>
+</div>
+<div class="modal" id="modal_light_box" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 0; background: none !important;">
+                <img class="image" style="width: 100%; max-height: 750px;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="select-language" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" id="wo_language_modal">
+                <div class="language_head">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-x"><line x1="18" y1="6" x2="6"
+                                                                                        y2="18"></line><line x1="6"
+                                                                                                             y1="6"
+                                                                                                             x2="18"
+                                                                                                             y2="18"></line></svg></span>
+                    </button>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="24" height="24" viewBox="0 0 24 24"
+                         class="feather feather-language">
+                        <path fill="currentColor"
+                              d="M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z"/>
+                    </svg>
+                    Language
+                </div>
+                <ul>
+                    <li class="language_select"><a href="?lang=english" rel="nofollow" class="English">English</a></li>
+                    <li class="language_select"><a href="?lang=arabic" rel="nofollow" class="Arabic">Arabic</a></li>
+                    <li class="language_select"><a href="?lang=dutch" rel="nofollow" class="Dutch">Dutch</a></li>
+                    <li class="language_select"><a href="?lang=french" rel="nofollow" class="French">French</a></li>
+                    <li class="language_select"><a href="?lang=german" rel="nofollow" class="German">German</a></li>
+                    <li class="language_select"><a href="?lang=italian" rel="nofollow" class="Italian">Italian</a></li>
+                    <li class="language_select"><a href="?lang=portuguese" rel="nofollow"
+                                                   class="Portuguese">Portuguese</a></li>
+                    <li class="language_select"><a href="?lang=russian" rel="nofollow" class="Russian">Russian</a></li>
+                    <li class="language_select"><a href="?lang=spanish" rel="nofollow" class="Spanish">Spanish</a></li>
+                    <li class="language_select"><a href="?lang=turkish" rel="nofollow" class="Turkish">Turkish</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <script type="text/javascript" src="https://demo.wowonder.com/themes/default/javascript/welcome.js"></script> -->
+<!-- <script type="text/javascript" src="https://demo.wowonder.com/themes/default/javascript/script.js"></script> -->
+<div class="extra-css"></div>
+
+</body>
+</html>
