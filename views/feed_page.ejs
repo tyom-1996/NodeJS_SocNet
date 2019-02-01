@@ -596,19 +596,19 @@
 									<li>
 										<a class="menu_list" href="https://demo.wowonder.com/a200796a" data-ajax="?link1=timeline&amp;u=a200796a">
 											<span class="split-link"><b>posts</b></span>
-											<span>0</span>
+											<span><%=posts_count%></span>
 										</a>
 									</li>
 									<li>
 										<a class="menu_list" href="https://demo.wowonder.com/a200796a/following" data-ajax="?link1=timeline&amp;u=a200796a&amp;type=following">
 											<span class="split-link"><b>Following</b></span>
-											<span>0</span>
+											<span><%=following_count%></span>
 										</a>
 									</li>
 									<li>
 										<a class="menu_list" href="https://demo.wowonder.com/a200796a/followers" data-ajax="?link1=timeline&amp;u=a200796a&amp;type=followers">
 											<span class="split-link"><b>Followers</b></span>
-											<span>0</span>
+											<span><%=followers_count%></span>
 										</a>
 									</li>
 								</ul>
@@ -1268,14 +1268,7 @@
 						</div>
 						<div class="page-margin">
 							<div class="footer-wrapper sidebar">
-								<div class="pull-right">
-									<a href="#" class="dropdown-toggle" data-toggle="modal" data-target="#select-language" role="button" aria-expanded="false">
-										<svg fill="#7a7a7a" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" class="feather feather-translate" style="margin-top: -3px;width: 15px;height: 15px;">
-											<path d="M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z"></path>
-										</svg>
-										Language
-									</a>
-								</div>
+
 								<div class="footer-powered">
 									<p>
 										© 2018 WoWonder
@@ -1639,9 +1632,9 @@
 
 
 
-<audio id="notification-sound" class="sound-controls" preload="auto">
-	<source src="https://demo.wowonder.com/themes/default/mp3/New-notification.mp3" type="audio/mpeg">
-</audio>
+<!--<audio id="notification-sound"  class="sound-controls" preload="auto">-->
+	<!--<source src="https://demo.wowonder.com/themes/default/mp3/New-notification.mp3" type="audio/mpeg">-->
+<!--</audio>-->
 <audio id="message-sound" class="sound-controls" preload="auto">
 	<source src="https://demo.wowonder.com/themes/default/mp3/New-message.mp3" type="audio/mpeg">
 </audio>
@@ -1690,9 +1683,7 @@
 <div role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div>
 
 
-
 </body>
-<script>
 
-</script>
 </html>
+

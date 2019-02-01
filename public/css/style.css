@@ -398,7 +398,7 @@ textarea.postText{border:none;padding-top:12px;padding-left:50px;height:45px;box
 .sidebar-user-data{width:24.33333%;margin:0;display:inline-block;padding:0 3px 5px;position:relative}
 .sidebar-user-data a{position:relative;display:block}
 .sidebar-user-data .sidebar-listed-user-avatar img{width:100%;margin:0;padding:0;display:inline-block}
-.sidebar-user-data .sidebar-listed-user-name{bottom:0;left:0;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.45));padding:5px;width:100%;position:absolute;font-size:12px;line-height:16px;max-height:56px}
+.sidebar-user-data .sidebar-listed-user-name{bottom:0;left:0;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.45));padding:5px;width:100%;position:absolute;font-size:11px;line-height:16px;max-height:56px}
 .sidebar-ad iframe,.sidebar-ad img,.sidebar-ad script{width:100%;max-width:100%}
 .publisher-box:focus{box-shadow:0 1px 10px 0 rgba(0,0,0,.1)}
 .publisher-box .post-avatar{width:35px;height:35px;border-radius:50%;position:absolute;left:10px;top:10px;z-index:22}

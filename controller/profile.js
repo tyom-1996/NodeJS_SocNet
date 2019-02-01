@@ -8,6 +8,7 @@ const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotalySecretKey');
 const follow_req_example = require('../module/follow_request_example');
 const follower_build = require('../module/show_follower_build');
+const posts_build = require('../module/posts_build');
 
 //Open Profile Page
 
@@ -26,7 +27,7 @@ router.get('/', (req, res, next)=> {
         if (err) throw err;
             follower_build.get_followers_and_following(data[0].id,(err,follow_data)=>{
 
-                 get_all_post(data[0].id,(err,posts) => {
+                 posts_build.get_all_post(data[0].id,(err,posts) => {
 
                       res.render('profile_page', {
                            user:data[0],
@@ -37,10 +38,10 @@ router.get('/', (req, res, next)=> {
                            posts:posts,
 
                            following_user_in_chat_block : follower_build.build(follow_data.following),
-                           following_user_in_following_block :following_child_block( follow_data.following),
+                           following_user_in_following_block :follower_build.following_child_block( follow_data.following),
                            following_user_count : follow_data.following.length,
 
-                           followers_user_in_followers_block:follow_data.followers, // change
+                           followers_user_in_followers_block:follower_build.followers_child_block(follow_data.followers), // change
                            followers_user_count : follow_data.followers.length,
 
                       });
@@ -94,41 +95,9 @@ router.post('/search',(req,res,next)=>{
 
 })
 
-     function get_all_post(user_id,callback){
-          if (user_id){
-               mysql.query(`select * from posts where user_id = '${user_id}'`,(err,posts) => {
-                    (err) ? callback(err,null) : callback(null,posts)
-               })
-          }
-     }
 
-     function following_child_block(following){
-          let result =  '';
 
-          if (following.length > 0){
-               for (let i = 0; i < following.length; i++) {
-                    result += `
-                    <div class="sidebar-user-data">
-                       <div class="sidebar-listed-user-avatar">
-                            <a class="avatarc" href="/user/${cryptr.encrypt(following[i].id)}" >
-                                <img src="${following[i].profil_photo}">
-                            </a>
-                            <a href="/user/${cryptr.encrypt(following[i].id)}" >
-                             <div class="sidebar-listed-user-name">${following[i].name}</div>
-                            </a>
-                       </div>
-                    </div>
-               `
-               }
-          }
 
-          return result
-
-     }
-
-     function followers_child_block(following){
-
-     }
 
 
 module.exports = router;

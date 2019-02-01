@@ -57,7 +57,6 @@ module.exports = function (io,clients) {
 
       if (clients[data.guest_mail]){
         follower_build.send_request_build(data.my_email,clients,data,(err,result,requester_id)=>{
-        					console.log(result)
           io.to(`${clients[data.guest_mail].socket}`).emit('add-request',{
             result:result,
             requester_id:requester_id

@@ -1,5 +1,6 @@
 const mysql = require("../config/mysql_connect");
-
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotalySecretKey');
 class show_follower{
 
 
@@ -129,8 +130,59 @@ class show_follower{
 																									callback(null,result,user[0].id)
 																				}
 															}
-
 										})
+					}
+
+
+
+				 following_child_block(following){
+										let result =  '';
+
+										if (following.length > 0){
+															for (let i = 0; i < following.length; i++) {
+																				result += `
+                    <div class="sidebar-user-data">
+                       <div class="sidebar-listed-user-avatar">
+                            <a class="avatarc" href="/user/${cryptr.encrypt(following[i].id)}" >
+                                <img src="${following[i].profil_photo}">
+                            </a>
+                            <a href="/user/${cryptr.encrypt(following[i].id)}" >
+                             <div class="sidebar-listed-user-name">${following[i].name}</div>
+                            </a>
+                       </div>
+                    </div>
+               `
+															}
+										}
+
+										return result
+
+					}
+
+
+
+
+					followers_child_block(following){
+										let result =  '';
+
+										if (following.length > 0){
+															for (let i = 0; i < following.length; i++) {
+																				result += `
+                    <div class="sidebar-user-data">
+                       <div class="sidebar-listed-user-avatar">
+                            <a class="avatarc" href="/user/${cryptr.encrypt(following[i].id)}" >
+                                <img src="${following[i].profil_photo}">
+                            </a>
+                            <a href="/user/${cryptr.encrypt(following[i].id)}" >
+                             <div class="sidebar-listed-user-name">${following[i].name}</div>
+                            </a>
+                       </div>
+                    </div>
+               `
+															}
+										}
+
+										return result
 					}
 
 

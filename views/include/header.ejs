@@ -302,228 +302,121 @@
         </nav>
     </div>
     <div class="loader" style="display: none;"></div>
+
+
+
+
+
+
+
+
+
+
     <script type="text/javascript">
 
-        var Searchcontainer = $('.search-container');
-        var SearchBox = $('.search-container .search-input');
-        var SearchResult = $('.search-dropdown-result');
-
-        function Wo_ChangeHomeButtonIcon() {
-
-            $('.navbar-home #home-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
-        }
-
-        function Wo_DetectSearchType(query) {
-            var Hash = smokeTheHash(query);
-            if (Hash) {
-                $('.search-advanced-container').hide(200);
-                Wo_SearchhashResult(query);
-            } else {
-                $('.search-advanced-container').fadeIn(200);
-                Wo_SearchResult(query);
-            }
-        }
-
-        function Wo_ClearSearches() {
-            $('.clear-searches').html('<i class="fa fa-spinner fa-spin"></i>');
-            $.get(Wo_Ajax_Requests_File(), {f: 'clearChat'}, function(data) {
-                if (data.status == 200) {
-                    location.reload();
-                }
-            });
-        }
-
-        function Wo_GetRecentSearchs() {
-            $.get(Wo_Ajax_Requests_File(), {f: 'search', s: 'recent'}, function(data) {
-                if (data.status == 200) {
-                    if (data.html.length > 0) {
-                        SearchResult.html('<div class="recent"><div class="gray recent-searches pull-left"> Recent Searches</div><div onclick="Wo_ClearSearches();" class="gray recent-searches clear-searches pointer pull-right" style="color: #F44336;"><svg style="vertical-align: middle;margin-top: -3px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Clear</div><div class="clear"></div></div>' + data.html);
-                    }
-                }
-            });
-        }
-        function Wo_SearchResult(query) {
-            if (SearchBox.val() != '') {
-                Wo_progressIconLoader(Searchcontainer.find('.navbar-form'));
-                Searchcontainer.addClass('open');
-                Searchcontainer.find('.search-advanced-link').attr('href','https://demo.wowonder.com/search/' + query);
-                Searchcontainer.find('.search-advanced-link').attr('data-ajax','?link1=search&query=' + query);
-                $.get(Wo_Ajax_Requests_File(), {f: 'search', s: 'normal', query: query}, function(data) {
-                    if (data.status == 200) {
-                        if (data.html.length == 0) {
-                            SearchResult.html('<span class="center-text">' + " No result found" + '<span>');
-                        } else {
-                            SearchResult.html(data.html);
-                        }
-                    }
-                    Wo_progressIconLoader(Searchcontainer.find('.navbar-form'));
-                });
-                $(document).click(function() {
-                    Searchcontainer.removeClass('open');
-                });
-            } else {
-                Searchcontainer.removeClass('open');
-            }
-        }
-
-
-        function Wo_SearchhashResult(query) {
-            var Searchcontainer = $('.search-container');
-            var SearchBox = $('.search-container .search-input');
-            var SearchResult = $('.search-dropdown-result');
-            if (SearchBox.val() != '') {
-                Wo_progressIconLoader(Searchcontainer.find('.navbar-form'));
-                Searchcontainer.addClass('open');
-                Searchcontainer.find('.search-advanced-link').attr('href','https://demo.wowonder.com/search/' + query);
-                Searchcontainer.find('.search-advanced-link').attr('data-ajax','?link1=search&query=' + query);
-                $.get(Wo_Ajax_Requests_File(), {f: 'search', s: 'hash', query: query}, function(data) {
-                    if (data.status == 200) {
-                        if (data.html.length == 0) {
-                            SearchResult.html('<span class="center-text">' + " No result found" + '<span>');
-                        } else {
-                            SearchResult.html(data.html);
-                        }
-                    }
-                    Wo_progressIconLoader(Searchcontainer.find('.navbar-form'));
-                });
-
-                $(document).click(function() {
-                    Searchcontainer.removeClass('open');
-                });
-            } else {
-                Searchcontainer.removeClass('open');
-            }
-        }
-
-        function smokeTheHash(str) {
-            var n = str.search("#");
-            if(n != "-1"){
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
-
-
-
-    <script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        $(document).on('click','.request_item',function(){
-//            var id = $(this).data('id')
-//            var _this = $(this)
-//            $.ajax({
-//                url:location.origin+'/friends/click_to_follow_request',
-//                type:'post',
-//                data:{'id':id},
-//                success:function(r){
-//                    // _this.remove()
-//                    location.href = _this.data('ajax')
-//                    // console.log(r)
-//                }
-//            })
-//        })
-
-
-        // if(typeof(EventSource) !== "undefined") {
+        // var Searchcontainer = $('.search-container');
+        // var SearchBox = $('.search-container .search-input');
+        // var SearchResult = $('.search-dropdown-result');
         //
-        //     var source = new EventSource("http://wowender.loc/demon/demon");
+        // function Wo_ChangeHomeButtonIcon() {
         //
-        //
-        //     source.addEventListener("request", function(e) {
-        //         var obj = JSON.parse(e.data);
-        //
-        //         if (obj.length > 0) {
-        //             var req = ''
-        //
-        //             for (var i = 0; i < obj.length; i++) {
-        //
-        //                 req += obj[i]
-
-                        // req += '<li class="request_item" style="cursor:pointer;"  data-ajax = "'+location.origin+'/user?id='+obj[i]['url_encryption']+'"  data-id = '+obj[i]['request_id']+'>'+
-                        //           ' <div class="notification-list ">'+
-
-                        //                  '<div class="notification-user-avatar pull-left">'+
-                        //                     '<img src="'+location.origin+'/'+obj[i]['profilPhoto']+'">'+
-                        //                  '</div>'+
-                        //                  '<div class="notification-text">'+
-                        //                     '<span class="main-color">'+
-                        //                       '<font style="vertical-align: inherit;">'+
-                        //                         '<font style="vertical-align: inherit;">'+obj[i]['name']+'</font>'+
-                        //                       '</font>'+
-                        //                     '</span>'+
-                        //                     '<font style="vertical-align: inherit;">'+
-                        //                       '<font style="vertical-align: inherit;">'+
-                        //                        ' followed  after you'+
-                        //                       '</font>'+
-                        //                     '</font>'+
-                        //                     '<div class="notification-time active">'+
-                        //                        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus active"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>'+
-
-                        //                      '<span class="ajax-time" title="10 hours ago">'+obj[i]['day_ago']+' day ago</span>'+
-                        //                     '</div>'+
-                        //                  '</div>'+
-                        //                  '<div class="clear"></div>'+
-
-                        //            '</div>'+
-                        //         '</li>'
-
-        //             }
-        //
-        //             $('#requests .new-update-alert').empty().html(obj.length).removeClass('hidden_new-update-alert')
-        //             $('#requests-list').empty().append(req)
-        //         }else{
-        //             $('#requests-list').empty()
-        //             $('#requests .new-update-alert').empty()
-        //         }
-        //
-        //     }, false);
-        //
-        //
-        //     source.addEventListener("fallowers", function(e) {
-        //
-        //         var obj = JSON.parse(e.data) ;
-        //         console.log(obj[0])
-        //
-        //         if (obj.length > 0) {
-        //
-        //             var result = ''
-        //             for (var i = 0; i < obj.length; i++) {
-        //                 result += obj[i]
-        //             }
-        //             $('.users').empty().append(result)
-        //         }else{
-        //             $('.users').empty().append('<p style="text-align:center;">No users online</p>')
-        //         }
-        //
-        //
-        //     }, false);
-        //
-        // } else {
-        //     console.log( "Sorry, your browser does not support server-sent events...");
+        //     $('.navbar-home #home-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
         // }
-
-
-
+        //
+        // function Wo_DetectSearchType(query) {
+        //     var Hash = smokeTheHash(query);
+        //     if (Hash) {
+        //         $('.search-advanced-container').hide(200);
+        //         Wo_SearchhashResult(query);
+        //     } else {
+        //         $('.search-advanced-container').fadeIn(200);
+        //         Wo_SearchResult(query);
+        //     }
+        // }
+        //
+        // function Wo_ClearSearches() {
+        //     $('.clear-searches').html('<i class="fa fa-spinner fa-spin"></i>');
+        //     $.get(Wo_Ajax_Requests_File(), {f: 'clearChat'}, function(data) {
+        //         if (data.status == 200) {
+        //             location.reload();
+        //         }
+        //     });
+        // }
+        //
+        // function Wo_GetRecentSearchs() {
+        //     $.get(Wo_Ajax_Requests_File(), {f: 'search', s: 'recent'}, function(data) {
+        //         if (data.status == 200) {
+        //             if (data.html.length > 0) {
+        //                 SearchResult.html('<div class="recent"><div class="gray recent-searches pull-left"> Recent Searches</div><div onclick="Wo_ClearSearches();" class="gray recent-searches clear-searches pointer pull-right" style="color: #F44336;"><svg style="vertical-align: middle;margin-top: -3px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Clear</div><div class="clear"></div></div>' + data.html);
+        //             }
+        //         }
+        //     });
+        // }
+        // function Wo_SearchResult(query) {
+        //     if (SearchBox.val() != '') {
+        //         Wo_progressIconLoader(Searchcontainer.find('.navbar-form'));
+        //         Searchcontainer.addClass('open');
+        //         Searchcontainer.find('.search-advanced-link').attr('href','https://demo.wowonder.com/search/' + query);
+        //         Searchcontainer.find('.search-advanced-link').attr('data-ajax','?link1=search&query=' + query);
+        //         $.get(Wo_Ajax_Requests_File(), {f: 'search', s: 'normal', query: query}, function(data) {
+        //             if (data.status == 200) {
+        //                 if (data.html.length == 0) {
+        //                     SearchResult.html('<span class="center-text">' + " No result found" + '<span>');
+        //                 } else {
+        //                     SearchResult.html(data.html);
+        //                 }
+        //             }
+        //             Wo_progressIconLoader(Searchcontainer.find('.navbar-form'));
+        //         });
+        //         $(document).click(function() {
+        //             Searchcontainer.removeClass('open');
+        //         });
+        //     } else {
+        //         Searchcontainer.removeClass('open');
+        //     }
+        // }
+        //
+        //
+        // function Wo_SearchhashResult(query) {
+        //     var Searchcontainer = $('.search-container');
+        //     var SearchBox = $('.search-container .search-input');
+        //     var SearchResult = $('.search-dropdown-result');
+        //     if (SearchBox.val() != '') {
+        //         Wo_progressIconLoader(Searchcontainer.find('.navbar-form'));
+        //         Searchcontainer.addClass('open');
+        //         Searchcontainer.find('.search-advanced-link').attr('href','https://demo.wowonder.com/search/' + query);
+        //         Searchcontainer.find('.search-advanced-link').attr('data-ajax','?link1=search&query=' + query);
+        //         $.get(Wo_Ajax_Requests_File(), {f: 'search', s: 'hash', query: query}, function(data) {
+        //             if (data.status == 200) {
+        //                 if (data.html.length == 0) {
+        //                     SearchResult.html('<span class="center-text">' + " No result found" + '<span>');
+        //                 } else {
+        //                     SearchResult.html(data.html);
+        //                 }
+        //             }
+        //             Wo_progressIconLoader(Searchcontainer.find('.navbar-form'));
+        //         });
+        //
+        //         $(document).click(function() {
+        //             Searchcontainer.removeClass('open');
+        //         });
+        //     } else {
+        //         Searchcontainer.removeClass('open');
+        //     }
+        // }
+        //
+        // function smokeTheHash(str) {
+        //     var n = str.search("#");
+        //     if(n != "-1"){
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }
     </script>
+
+
+
 
 
     <script src="/socket.io/socket.io.js"></script>
@@ -550,7 +443,9 @@
 
       // Show request
       socket.on("add-request", function(data){
-        let bool = true
+			soundClick()
+
+											let bool = true
         $('.data_req_us_id').each(function(i,elem) {
 
           if($(this).val() == data.requester_id){
@@ -574,7 +469,12 @@
 
       });
 
-
+        function soundClick() {
+            var audio = new Audio(); // Создаём новый элемент Audio
+            audio.src = 'https://demo.wowonder.com/themes/default/mp3/New-notification.mp3';
+            audio.autoplay = true; // Автоматически запускаем
+            console.log('new_request')
+        }
 
       //  CHANGE follow request status
 
@@ -601,7 +501,6 @@
              }
            })
       })
-
 
 
     </script>
