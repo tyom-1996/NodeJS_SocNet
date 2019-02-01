@@ -3,19 +3,19 @@ const mysql = require("../config/mysql_connect");
 class show_follower{
 
 
-					// get_followers_and_following(myid,	clients,callback){
-					// 					let sql1 = `select * from users where id in (select user_id  from followers where follower_id = ${myid} )`
-					// 					let sql2 = `select * from users where id in (select follower_id  from followers where  user_id = ${myid} )`
-					// 					var this_ = this;
-					// 					mysql.query(sql1, function(err, following){
-					// 										mysql.query(sql2, function(err, followers){
-					// 										    (err) ? callback(err,null) :callback(null, {
-					// 										    					followers: this_.follow_bild(followers, clients),
-					// 																			following: this_.follow_bild(following, clients)
-					// 														});
-					// 										})
-					// 					});
-					// }
+					get_followers_and_following(myid,callback){
+										let sql1 = `select * from users where id in (select user_id  from followers where follower_id = ${myid} )`
+										let sql2 = `select * from users where id in (select follower_id  from followers where  user_id = ${myid} )`
+										var this_ = this;
+										mysql.query(sql1, function(err, following){
+															mysql.query(sql2, function(err, followers){
+															    (err) ? callback(err,null) :callback(null, {
+															    					followers: followers,
+																								following: following
+																			});
+															})
+										});
+					}
 
 					// get_following(myid, clients, callback){
 					// 					let sql = `select * from users where id in (select user_id  from followers where follower_id = ${myid} )`

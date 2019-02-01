@@ -319,7 +319,7 @@
             }
         }
         #filterby-post li {
-            width: 16.5%;
+            width: 20%;
         }
 
 
@@ -350,7 +350,7 @@
 						<span class="input-group-btn">
 							<span class="btn btn-upload-image btn-file">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                                <input type="file" name="cover" accept="image/*" onchange="Wo_UpdateProfileCover();">
+                                <input type="file" name="cover" accept="image/*" >
 							</span>
 						</span>
                         </div>
@@ -389,8 +389,9 @@
                     </div>
                     <div class="user-cover-reposition-container">
                         <div class="user-cover-reposition-w">
-                            <img id="cover-image" src="https://demo.wowonder.com/upload/photos/d-cover.jpg?cache=0" alt="a200796a Cover Image" onclick="Wo_OpenProfileCover('upload/photos/d-cover.jpg');" class="pointer"/>
+                            <img id="cover-image" src="<%=user.card_photo%>" alt="a200796a Cover Image" onclick="Wo_OpenProfileCover('upload/photos/d-cover.jpg');" class="pointer"/>
                         </div>
+
                         <div class="user-reposition-container">
                             <img id="full-image" src="https://demo.wowonder.com/upload/photos/d-cover.jpg" alt="User Image"/>
                             <div class="user-reposition-dragable-container" align="center">
@@ -464,7 +465,7 @@
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" /></svg> <span class="online-text"> Online </span>
 						</li>-->
                             <li class="list-group-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M21,6V8H3V6H21M3,18H12V16H3V18M3,13H21V11H3V13Z" /></svg> <span id="user_post_count">14</span> posts					</li>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M21,6V8H3V6H21M3,18H12V16H3V18M3,13H21V11H3V13Z" /></svg> <span id="user_post_count"><%=posts.length%></span> posts					</li>
                             <li class="list-group-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="feather"><path fill="currentColor" d="M17.58,4H14V2H21V9H19V5.41L15.17,9.24C15.69,10.03 16,11 16,12C16,14.42 14.28,16.44 12,16.9V19H14V21H12V23H10V21H8V19H10V16.9C7.72,16.44 6,14.42 6,12A5,5 0 0,1 11,7C12,7 12.96,7.3 13.75,7.83L17.58,4M11,9A3,3 0 0,0 8,12A3,3 0 0,0 11,15A3,3 0 0,0 14,12A3,3 0 0,0 11,9Z" /></svg>
                                 <%=user.gender%>					</li>
@@ -775,9 +776,7 @@
                         <li class="list-group-item filter-by-li"  onclick="Wo_FilterPostBy('video');" dir="auto" style="color: #4caf50;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,2A7,7 0 0,1 19,9A7,7 0 0,1 12,16A7,7 0 0,1 5,9A7,7 0 0,1 12,2M12,4A5,5 0 0,0 7,9A5,5 0 0,0 12,14A5,5 0 0,0 17,9A5,5 0 0,0 12,4M12,6A3,3 0 0,1 15,9A3,3 0 0,1 12,12A3,3 0 0,1 9,9A3,3 0 0,1 12,6M6,22A2,2 0 0,1 4,20C4,19.62 4.1,19.27 4.29,18.97L6.11,15.81C7.69,17.17 9.75,18 12,18C14.25,18 16.31,17.17 17.89,15.81L19.71,18.97C19.9,19.27 20,19.62 20,20A2,2 0 0,1 18,22H6Z" /></svg>
                         </li>
-                        <li class="list-group-item filter-by-li" onclick="Wo_FilterPostBy('files');" dir="auto" style="color: #7383BF;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" /></svg>
-                        </li>
+
                     </ul>				<div class="posts_load">
                         <div id="posts" data-story-user="46169">
                             <div class="pinned-post-container">
@@ -2138,29 +2137,12 @@
                         <h3 class="sun_side_widget_title">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#009da0" d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z"></path></svg>
                             <a href="https://demo.wowonder.com/a200796a/following" data-ajax="?link1=timeline&u=a200796a&type=following">Following</a>
-                            <span>2</span>
+                            <span><%=following_user_count%></span>
                         </h3>
                         <li>
                             <div class="sidebar-following-users-container sun_prof_foll_ing">
-                                <div class="sidebar-user-data">
-                                    <div class="sidebar-listed-user-avatar">
-                                        <a class="avatarc" href="https://demo.wowonder.com/hassan" data-ajax="?link1=timeline&u=hassan">
-                                            <img src="https://demo.wowonder.com/upload/photos/2018/12/nhjTCe2Aw4XXdnFwMqYK_26_d4d78df443fc474b800bcdc4afd0deac_avatar.jpg?cache=0">
-                                        </a>
-                                        <a href="https://demo.wowonder.com/hassan" data-ajax="?link1=timeline&u=hassan">
-                                            <div class="sidebar-listed-user-name">hassan</div>
-                                        </a>
-                                    </div>
-                                </div><div class="sidebar-user-data">
-                                    <div class="sidebar-listed-user-avatar">
-                                        <a class="avatarc" href="https://demo.wowonder.com/deendoughouz" data-ajax="?link1=timeline&u=deendoughouz">
-                                            <img src="https://demo.wowonder.com/upload/photos/2018/08/4cSucyTxbbcQbzziDeAZ_19_bc5567243fccbd8ad1c545f986a55efc_avatar.png?cache=1534673312">
-                                        </a>
-                                        <a href="https://demo.wowonder.com/deendoughouz" data-ajax="?link1=timeline&u=deendoughouz">
-                                            <div class="sidebar-listed-user-name">Deen Dough</div>
-                                        </a>
-                                    </div>
-                                </div>		</div>
+                             	<%-following_user_in_following_block%>
+                            </div>
                         </li>
                         <li><div class="clear"></div></li>
                     </ul>
@@ -2169,7 +2151,7 @@
                         <h3 class="sun_side_widget_title">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#8d73cc" d="M16,13C15.71,13 15.38,13 15.03,13.05C16.19,13.89 17,15 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M8,11A3,3 0 0,0 11,8A3,3 0 0,0 8,5A3,3 0 0,0 5,8A3,3 0 0,0 8,11M16,11A3,3 0 0,0 19,8A3,3 0 0,0 16,5A3,3 0 0,0 13,8A3,3 0 0,0 16,11Z"></path></svg>
                             <a href="https://demo.wowonder.com/a200796a/followers" data-ajax="?link1=timeline&u=a200796a&type=followers">Followers</a>
-                            <span>0</span>
+                            <span><%=followers_user_count%></span>
                         </h3>
                         <li>
                             <div class="sidebar-followers-users-container sun_prof_foll_ing">

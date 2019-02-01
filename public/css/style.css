@@ -395,7 +395,7 @@ textarea.postText{border:none;padding-top:12px;padding-left:50px;height:45px;box
 .sidebar-conatnier .sidebar-profile-style .card.hovercard .info{position:inherit}
 .sidebar-conatnier .sidebar-profile-style .card.hovercard .info .title{position:inherit;font-size:16px;margin-top:60px;text-align:center;margin-bottom:5px}
 .sidebar-conatnier .sidebar-profile-style .card.hovercard .info .title a{color:#333}
-.sidebar-user-data{width:33.33333%;margin:0;display:inline-block;padding:0 3px 5px;position:relative}
+.sidebar-user-data{width:24.33333%;margin:0;display:inline-block;padding:0 3px 5px;position:relative}
 .sidebar-user-data a{position:relative;display:block}
 .sidebar-user-data .sidebar-listed-user-avatar img{width:100%;margin:0;padding:0;display:inline-block}
 .sidebar-user-data .sidebar-listed-user-name{bottom:0;left:0;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.45));padding:5px;width:100%;position:absolute;font-size:12px;line-height:16px;max-height:56px}
