@@ -186,6 +186,59 @@ class show_follower{
 					}
 
 
+
+         friends_of_my_friends(my_id,callback){
+            let sql = `select * from users where id in (select follower_id from followers where follower_id !=${my_id}
+            and user_id  in (select user_id from followers where follower_id  = ${my_id}) )`
+
+            var result = '';
+
+            mysql.query(sql,(err,data)=>{
+                  if(err){
+                    callback(err,null)
+                  }
+
+                  else{
+
+                      for (let i = 0; i < data.length ; i++) {
+                         result +=`
+                                <div id="wo_sidebar_users">
+                                <div class="avatar">
+                                  <img src="${data[i].profil_photo}" >
+                                </div>
+                                <span class="user-popover" data-id="${data[i].id}" >
+                                  <a href="/user/${cryptr.encrypt(data[i].id)}"  class="wo_user_link_name">
+                                      <span class="user-name" title="Thobias Lobo">${data[i].name}</span>
+                                  </a>
+                                </span>
+                                <div class="wo_user_username_cont"></div>
+                                <div class="user-follow-btn">
+                                <div class="user-follow-button">
+                                <span>
+                                   <button type="button"  class="btn btn-default btn-sm wo_follow_btn" id="wo_useract_btn">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                         <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                         <circle cx="8.5" cy="7" r="4"></circle>
+                                         <line x1="20" y1="8" x2="20" y2="14"></line>
+                                         <line x1="23" y1="11" x2="17" y2="11"></line>
+                                      </svg>
+                                      <span class="button-text"> Follow</span>
+                                   </button>
+                                </span>
+                                </div>
+                                </div>
+                                </div>
+                         `
+                      }
+                    callback(null,result);
+
+
+                  }
+            })
+         }
+
+
 }
 
 

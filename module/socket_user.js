@@ -30,20 +30,20 @@ module.exports = function (io,clients) {
          //SAY IM ONLY
 
          if (io.session){
-
-              setTimeout(()=>{
-                   follower_build.get_following_obj(io.session.user[0].id,(err,following_user)=>{
-                        for (let i = 0; i <following_user.following.length ; i++) {
-                             if (clients[following_user.following[i].email]){
-                                  io.to(`${clients[following_user.following[i].email].socket}`).emit('i-am-online',{
-                                       message:`${io.session.user[0].name } ${io.session.user[0].surname} online`,
-                                       id:io.session.user[0].id
-                                  });
-                             }
-                        }
-                   })
-              },3000)
-
+           if(io.session.user){
+                setTimeout(()=>{
+                     follower_build.get_following_obj(io.session.user[0].id,(err,following_user)=>{
+                          for (let i = 0; i <following_user.following.length ; i++) {
+                               if (clients[following_user.following[i].email]){
+                                    io.to(`${clients[following_user.following[i].email].socket}`).emit('i-am-online',{
+                                         message:`${io.session.user[0].name } ${io.session.user[0].surname} online`,
+                                         id:io.session.user[0].id
+                                    });
+                               }
+                          }
+                     })
+                },3000)
+           }
          }
 
 
