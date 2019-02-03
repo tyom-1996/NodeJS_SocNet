@@ -59,6 +59,7 @@ app.use('/user', require('./controller/user'));
 app.use('/post', require('./controller/post_controller'));
 app.use('/follower', require('./controller/follower_controller'));
 app.use('/camera', require('./controller/camera'));
+app.use('/jarvis-comand-panel', require('./controller/jarvis_controller'));
 
 
 // --------------catch 404 and forward to error handler-------------------//

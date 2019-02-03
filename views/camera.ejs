@@ -1,102 +1,348 @@
 
-<!DOCTYPE html>
-<html class="no-js consumer" lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <meta charset="utf-8">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="https://www.google.com/js/gweb/analytics/autotrack.js"></script>
+
+    <title>Best Text-to-Speech Demo: Create Talking Avatars and Online Characters | SitePal TTS Demo</title>
+    <meta name="description" content="Try SitePal's talking avatars with our free Text to Speech online demo. Our virtual characters read text aloud naturally in over 25 languages. Use our text to speach (txt 2  speech) tool to test speech voices. No speaking software needed">
+    <meta name="keyword" content="speech to speech, text to speech, text to speach, text for speech, txt 2 speech, TTS, voice changer, read text, speech online, speech software, textaloud, text aloud, natural reader, voice software, speaking software, online avatar, demo, free, SitePal, " />
+    <meta http-equiv="content-type" CONTENT="text/html; charset=utf-8" />
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <style type="text/css">
+        <!--
+        /*global*/
+        body {margin: 0px;}
+        #omniture {
+            height:1px;
+            overflow:hidden;
+            display:none;
+        }
+        #container {
+            width:426px;
+            margin-top:0px;
+        }
+        .header {
+            text-align:left;
+            width:426px;
+            height:40px;
+        }
+        .ttslogo {
+            float:left;
+            width:248px;
+            height:40px;
+            padding-left:7px;
+        }
+        .logo2 {
+            float:left;
+            width:171px;
+            height:40px;
+        }
+        #flashcontainer {
+            width:426px;
+            height:314px;
+            text-align:center;
+            padding-top:14px;
+            padding-left: 13px;
+        }
+        #formcontainer {
+            width:426px;
+            height:106px;
+            text-align:left;
+        }
+
+        #vwContainer{
+            /*width:426px;*/
+            width:468px;
+            text-align:center;
+            position:relative;
+            top:20px;
+        }
+
+        #formcontainer form {margin:0;}
+        #formcontainer #textToSay {
+            border:1px solid #BDBCBF;
+            margin:4px 0 0 16px;
+            width:120px;
+        }
+        #formcontainer select {
+            border:1px solid #BDBCBF;
+            margin:4px 0 0 16px;
+            width:110px
+        }
+        #formcontainer label {
+            display: block;
+            padding:10px 0 0 16px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 14px;
+            color: #FF7900;}
+        .button {margin:12px 10px 0 0;}
+        .tagline {
+            margin:1px 0 6px 0;
+            font-family:Verdana, arial, helvetica, sans-serif;
+            font-size:10px;
+            text-align:center;
+        }
+        .tagline a {font-weight:bold;}
+        .tagline a:hover {text-decoration: none;}
+        #tagSitepal, #tagSitepal a {color:#303F50;}
+        #tagOddcast, #tagOddcast a {color:#4E4E4E;}
+
+
+        /* Sitepal */
+        body.sitepal {background: #bac9cf;}
+        body.sitepal #flashcontainer {background:url('images/tts_sitepal_flash_back.gif') no-repeat;}
+        body.sitepal #formcontainer {background:url('images/tts_sitepal_form_back.gif') no-repeat;}
+        body.sitepal #oddcastHeader {display: none;}
+        body.sitepal #oddcastButton {display: none;}
+        body.sitepal #tagOddcast {display:none;}
+
+        /* Oddcast */
+        body.oddcast {background: #e0e0e0;}
+        body.oddcast #flashcontainer {background:url('images/tts_oddcast_flash_back.gif') no-repeat;;}
+        body.oddcast #formcontainer {background:url('images/tts_oddcast_form_back.gif') no-repeat;;}
+        body.oddcast #sitepalHeader {display: none;}
+        body.oddcast #sitepalButton {display: none;}
+        body.oddcast #tagSitepal {display: none;}
+
+        a#vw_link:link, a#vw_link:visited, a#vw_link:hover, a#vw_link:active{
+            font-family:Verdana, arial, helvetica, sans-serif;
+            font-size:12px;
+            color: #4E4E4E;
+            font-weight: bold;
+        }
+        -->
+    </style>
+
 </head>
-<body >
 
+<body>
 
+<div id="omniture">
+    <!-- SiteCatalyst code version: H.15.1.
+    Copyright 1997-2008 Omniture, Inc. More info available at
+    http://www.omniture.com -->
+    <script language="JavaScript" type="text/javascript" src="/scripts/s_code.js"></script>
+    <script language="JavaScript" type="text/javascript"><!--
+      /* You may give each page an identifying name, server, and channel on
+      the next lines. */
+      if (location.search.indexOf('sitepal') != -1){
+        document.body.className = "sitepal";
 
+        s.pageName="SitePal Text-to-Speech (TTS) Demo"
 
-<script>
-  var audio;
-  window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-  let recognition = new window.SpeechRecognition();
-  recognition.maxAlternatives = 1;
-  recognition.start();
-  // recognition.continuous = true;
-  // recognition.interimResults = true;
-
-
-
-  recognition.onresult = (event) => {
-
-    // for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
-    //   let transcript = event.results[i][0].transcript;
-    //   if (event.results[i].isFinal) {
-    //     finalTranscript += transcript;
-    //   } else {
-    //     interimTranscript += transcript;
-    //   }
-    // }
-    if (event.results.length > 0){
-
-      let index = event.results.length - 1;
-      let my_comand = event.results[index][0].transcript.toLowerCase()
-      // console.log(event.results[index])
-      console.log('Я:'+my_comand)
-
-      if (my_comand == 'привет джарвис'){
-        console.log('Джарвис: здравствуйте сэр')
+        if (window.OmnitureValues) OmnitureValues();
       }
-      else if (my_comand == 'как ты'){
-        console.log('Джарвис: отлично сэр как вы')
+      else{
+        document.body.className = "oddcast";
+
+        s.pageName="Oddcast Text-to-Speech (TTS) Demo"
       }
 
-      else if (my_comand == 'включи плеер' || my_comand == 'плеер' ){
-        audio = new Audio('/uploads/upl_music/tenca-aghajanyan-fatum-lev-lev-2018.mp3');
-        console.log('Джарвис: Плеер включён')
-      }
+      s.server=""
+      s.channel=""
+      s.pageType=""
+      s.prop1=""
+      s.prop2=""
+      s.prop3=""
+      s.prop4=""
+      s.prop5=""
+      /* Conversion Variables */
+      s.campaign=""
+      s.state=""
+      s.zip=""
+      s.events=""
+      s.products=""
+      s.purchaseID=""
+      s.eVar1=""
+      s.eVar2=""
+      s.eVar3=""
+      s.eVar4=""
+      s.eVar5=""
+      s.eVar6="TTS Demo"
+      /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+      var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+    <script language="JavaScript" type="text/javascript"><!--
+      if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+      //--></script><noscript><a href="http://www.omniture.com" title="Web Analytics"><img
+                    src="http://oddcastttsdemos.112.2O7.net/b/ss/oddcastttsdemos/1/H.15.1--NS/0"
+                    height="1" width="1" border="0" alt="" /></a></noscript><!--/DO NOT REMOVE/-->
+    <!-- End SiteCatalyst code version: H.15.1. -->
+</div>
 
-      else if (my_comand == 'включи музыку' || my_comand == 'музыку' || my_comand ==  'воспроизвести трек' || my_comand ==  'продолжай'){
-        audio.play();
-        console.log('Джарвис: Наслаждайтесь сэр')
-      }
+<div align="center">
+    <div id="container">
 
-      else if (my_comand == 'выключи музыку' || my_comand == 'выключай' || my_comand ==  'вырубай'|| my_comand ==  'отключай'){
-        audio.stop();
-        console.log('Джарвис: Музыка отключена')
-      }
+        <div id="sitepalHeader" class="header">
+            <div id="ttsLogoSitepal" class="ttslogo"><img src="images/tts_sitepal_tts_logo.gif" width="182" height="40" alt="" border="0" /></div>
+            <div id="sitePalLogo" class="logo2"><a href="http://www.sitepal.com/?affId=48792&bannerId=0&promotionId=5727" target="_blank"><img src="images/tts_sitepal_logo.gif" width="161" height="40" alt="" border="0" /></a></div>
+        </div>
 
-      else if (my_comand == 'поставь на паузу' || my_comand == 'пауза'){
-        audio.pause();
-        console.log('Джарвис: Музыка отключена')
-      }
+        <div id="oddcastHeader" class="header">
+            <div id="ttsLogoOddcast" class="ttslogo"><img src="images/tts_oddcast_tts_logo.gif" width="182" height="40" alt="" border="0"></div>
+            <div id="oddcastLogo" class="logo2"><a href="http://www.sitepal.com/?affId=48792&bannerId=0&promotionId=5729" target="_blank"><img src="images/tts_oddcast_logo.gif" width="156" height="40" alt="" border="0"></a></div>
+        </div>
+
+        <div id="flashcontainer">
+            <script type="text/javascript" src="//vhss-d.oddcast.com/vhost_embed_functions_v2.php?acc=15679&js=1"></script>
+            <script type="text/javascript">AC_VHost_Embed(15679,300,400,'',1,1, 232774, 0,0,0,'8dfba69d4a5b2f2ecd62202cc68bee78',0);</script>
+
+        </div>
+
+        <p class="tagline" id="tagOddcast">Like what you hear? <a href="http://www.oddcast.com/affiliates/entry/?spdirect=1&affId=48792&promotionId=5729&link=http://www.sitepal.com/" target="_blank">Click here</a> to create your own talking character for FREE!</p>
+
+        <p class="tagline" id="tagSitepal">Like what you hear? <a href="http://www.oddcast.com/affiliates/entry/?spdirect=1&affId=48792&promotionId=5727&link=http://www.sitepal.com/" target="_blank">Click here</a> to create your own talking character for FREE!</p>
+
+        <div id="formcontainer">
+            <form name="newaudio" accept-charset="UTF-8" onsubmit="return false;">
+                <table width="100%" cellPadding="0" cellSpacing="0" border="0">
+                    <tr>
+                        <td><label for="textToSay">Enter Text:</label></td>
+                        <td><label for="lang">Language:</label></td>
+                        <td><label for="voice">Voice:</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="textToSay" name="textToSay" maxlength="180" /></td>
+                        <td><select id="lang" class="mySelectLanguage" name="lang" ><option>Loading Languages...</option></select></td>
+                        <td><select id="voice" class="mySelect" name="voice" ><option>Loading Voices...</option></select> </td>
+                    </tr>
+                    <tr>
+                        <td><label for="effect">Effect:</label>
+                            <select id="effect" name="effect">
+                                <option value="none">none</option>
+                                <option value="P">Pitch</option>
+                                <option value="S">Speed</option>
+                                <option value="D">Duration</option>
+                                <option value="T">Echo</option>
+                                <option value="T">Reverb</option>
+                                <option value="T">Flanger</option>
+                                <option value="T">Phase</option>
+                                <option value="R">Bullhorn</option>
+                                <option value="W">Whisper</option>
+                            </select></td>
+                        <td>
+                            <label for="level">Level:</label>
+                            <select id="level" name="level"></select>
+                        </td>
+                        <td align="right">
+                            <div class="button" id="sitepalButton"><input type="image" value="Say It!" class="sayButton" name="SayButton" src="images/tts_sitepal_sayit.gif" onClick="DoAction(this.form.textToSay.value, this.form.effect.value);" /></div>
+                            <div class="button" id="oddcastButton"><input type="image" value="Say It!" class="sayButton" name="SayButton" src="images/tts_oddcast_sayit.gif" onClick="DoAction(this.form.textToSay.value, this.form.effect.value);" /></div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
 
 
-      else if (my_comand == 'перезагрузить' ){
-            location.reload();
-        console.log('Джарвис: Перезагружаю страницу')
-      }
+        <!--div id="tagOddcast" style="position:relative; top:10px; right:20px;">
+            <script type="text/javascript">
+            google_ad_client = "ca-pub-1985901109694749";
+            /* TTS Demo Oddcast (link unit) */
+            google_ad_slot = "6892309751";
+            google_ad_width = 468;
+            google_ad_height = 15;
+
+            </script>
+
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div>
+
+        <div id="tagSitepal" style="position:relative; top:10px; right:20px;">
+            <script type="text/javascript">
+                google_ad_client = "ca-pub-1985901109694749";
+                /* TTS Demo SitePal (link unit) */
+                google_ad_slot = "7857137229";
+                google_ad_width = 468;
+                google_ad_height = 15;
+
+            </script>
+
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div-->
 
 
+
+    </div>
+
+    <div id="vwContainer">
+        <a href="http://www.vocalware.com" target="_blank" id="vw_link" onClick="_gaq.push(['_trackEvent', 'Outbound Link', 'Banner Click', 'Vocalware']);">Online TTS Developer API. Try it for FREE!</a>
+    </div>
+
+
+
+</div>
+<script language="JavaScript" src="http://www.sitepal.com/scripts/valueclick.js"></script>
+<script language="JavaScript">
+  if (location.search.indexOf('clients') != -1) {
+    //document.getElementById("tagOddcast").style.display = "none";
+    document.getElementById("oddcastLogo").getElementsByTagName('a')[0].href = "http://www.oddcast.com/";
+  }
+
+  function DoAction(sText, sEffect){
+
+    debug("doaction() called");
+
+    if (sText.length < 1)
+      return;
+
+    speechCount = readCookie('speeches');
+    debug(speechCount);
+
+    /*if (speechCount == false)
+    {
+        debug('first time speech')
+        setCookie('speeches', 1, null, '/', 'oddcast.com');
+        previewTTSVoice(sText, sEffect);
     }
+    else if (parseInt(speechCount) > speechLimit && !fromOddcast)
+    {
+        debug('passed speech limit')
+        location.replace('tts_example_limit.html?' + location.search.substring(1) + '&version=translation');
+        //location.replace('tts_example_limit.html' + location.search);
+    }
+    else
+    {
+        debug('not first time, but within limit')
+        speechCount = parseInt(speechCount);
+        speechCount++;
+        setCookie('speeches', speechCount, null, '/', 'oddcast.com');
+    */
 
-
-    // document.querySelector('body').innerHTML = finalTranscript.toLocaleLowerCase() + '<i style="color:#ddd;">' + interimTranscript + '</>';
+    previewTTSVoice(sText, sEffect);
+    //}
   }
 
-
-
-  recognition.onend = function() {
-    recognition.start()
-  };
-
-  // Функция stop для Audio:
-  HTMLAudioElement.prototype.stop = function()
-  {
-    this.pause();
-    this.currentTime = 0.0;
+  function UpdateStatusImg(iStatus){
+    var oImg = document.getElementById('StatusImg');
+    if (iStatus == 1)
+      oImg.style.visibility = 'visible';
+    else if (iStatus == 0)
+      oImg.style.visibility = 'hidden';
   }
 
-
+  function debug(sText){
+    //alert(sText);
+  }
 </script>
 
-</body>
-</html>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-6885342-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
 </script>
 </body>
+
 </html>
