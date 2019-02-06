@@ -1,3 +1,5 @@
+
+
 var audio;
 var finalTranscript = '';
 window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -11,18 +13,14 @@ recognition.interimResults = true;
 
 
 
-
-
-
 var name = ''
 $(document).ready(function(){
+  setInterval(()=>{
+       // responsiveVoice.speak("команда принята обновляю страницу", "Russian Male", {pitch: 0.9});
+  },2000)
+
   $('body').append('<div class="voice_comand_block"><canvas id="canvas"></canvas></div>');
 })
-
-
-
-
-
 
 // recognition.onstart = function() { ... }
 // recognition.onresult = function(event) { ... }
