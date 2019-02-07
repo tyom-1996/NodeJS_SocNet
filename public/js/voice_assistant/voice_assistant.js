@@ -2,6 +2,8 @@
 
 var audio;
 var speak;
+var voice_name = 'гидеон'
+
 var finalTranscript = '';
 window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
 var recognition = new window.SpeechRecognition();
@@ -14,7 +16,6 @@ recognition.interimResults = true;
 
 
 
-var name = ''
 $(document).ready(function(){
        // // responsiveVoice.speak("команда принята обновляю страницу", "Russian Male", {pitch: 0.8});
   $('body').append('<div class="voice_comand_block"><canvas id="canvas"></canvas></div>');
@@ -28,6 +29,7 @@ $(document).ready(function(){
 //   console.log( 'Здравствуйте сэр ');
 // }
 
+//hello
 
 
 function say(text){
