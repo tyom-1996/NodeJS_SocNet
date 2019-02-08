@@ -4,18 +4,18 @@
 
 function Gideon(){
 
-     constructor(name){
-          this.name
-     }
+
 
   this.audio;
   this.speak;
   this.finalTranscript = '';
+
   Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
     get: function(){
       return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
     }
   })
+
   this.say = (text)=>{
     console.log('micrafon off')
     this.recognition.stop()
@@ -23,6 +23,20 @@ function Gideon(){
     this.speak.id = 'id'
     this.speak.play()
   }
+
+
+  this.gideon_test = (comands,my_comand) => {
+
+							$("body").keyup((event)=>{
+												if(event.keyCode == 13){
+																	this.command_execution(comands,my_comand);
+												}
+							});
+		}
+
+
+
+
   this.start = () => {
       window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
       this.recognition = new window.SpeechRecognition();
@@ -54,6 +68,7 @@ function Gideon(){
         },100)
       };
   }
+
 
   this.SetComands = (comands)=>{
     this.recognition.onresult = (event) => {
@@ -99,22 +114,30 @@ function Gideon(){
             comands[key]();
         }
 
-      //------SEARCH IN GOOGLE
+      //------many teg
 
         else{
             this.search_comands_arr = key.split('*')
 
             if(this.search_comands_arr.length > 1){
+
                 if (my_comand.indexOf(this.search_comands_arr[0]+' ') != -1){
                   this.search_query = my_comand.replace(this.search_comands_arr[0],'');
                   this.recognition.stop()
                   comands[key](this.search_query);
                 }
+
+
             }
+
+
+
         }
 
       }
   }
+
+
 
 }
 

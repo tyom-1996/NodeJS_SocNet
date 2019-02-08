@@ -1,9 +1,12 @@
 
 
-  var gideon = new Gideon()
+  var gideon = new Gideon('Artyom');
   var audio;
 
-  gideon.start()
+  gideon.start();
+
+  // gideon.say('кто ты ');
+
 
   let comands = {
 
@@ -232,7 +235,7 @@
           console.log('да я такая')
           gideon.say('да я такой')
       },
-      'поиск*teg':(teg)=>{
+      'поиск*':(teg)=>{
         if (teg.length > 0){
           window.open("http://www.google.com/search?q="+ encodeURIComponent(teg))
           gideon.say('найдены следующие результаты по запросу,'+teg)
@@ -240,16 +243,21 @@
           gideon.say('команда не выполнена.пожалуйста,введите ключевые слова для поиска')
         }
       },
-      'меня зовут*я из*':(te1,teg2)=>{
-
-      },
       'спокойной ночи||гидеон спокойной ночи||спокойной ночи гидеон':()=>{
         gideon.say('спокойной ночи сэр')
       }
   }
 
 
-gideon.SetComands(comands)
+
+  gideon.gideon_test(comands,'поиск я из армении');
+
+
+
+
+
+
+  // gideon.SetComands(comands)
 
 
 
