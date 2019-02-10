@@ -1,3 +1,5 @@
+
+
   var gideon = new Gideon('Artyom');
   var audio;
 
@@ -13,7 +15,7 @@
         console.log('Гидеон: Здравствуйте сэр')
         gideon.say('Здравствуйте сэр')
 
-      },'гидеон||компьютер||компьютер':()=>{
+      },'гидеон':()=>{
 
           console.log('Гидеон: Да сэр')
           gideon.say('Да сэр',"Russian Male")
@@ -25,8 +27,8 @@
 
       },'гидеон кто ты||кто ты':()=>{
 
-          console.log('я онлайн ассистент и ваш верный помощник')
-          gideon.say('я, онлайн ассистент, и ваш верный помощник!!')
+          console.log('Гидеон: я онлайн ассистент ваш верный помощник и воображаемый друг ')
+          gideon.say('я онлайн ассистент ваш верный помощник и воображаемый друг')
 
       },'ты здесь||гидеон ты здесь':()=>{
 
@@ -60,6 +62,13 @@
           gideon.say('отлично сэр, чем желаете заняться?')
           // gideon.say('отлично сэр, чем желаете заняться?',"Russian Male", {pitch: 0.8})
       },
+      'перезагрузить||обновить||обнови страницу||обновить страницу||перезагрузи страницу': function() {
+          gideon.say('команда принята обновляю страницу',"Russian Male")
+          console.log('команда принята обновляю страницу')
+          setTimeout(()=>{
+            location.reload()
+          },3000)
+      },
       'открыть запросы': function() {
           if(!$('#requests').hasClass('open'))   $('#requests').addClass('open');
       },
@@ -87,7 +96,6 @@
       'отменить запрос||отмени запрос':cancel_follow,
       'включи плеер||плеер||гидеон включи плеер||гидеон загрузи плеер|| загрузи плеер||загрузить плеер':() => {
         audio = new Audio('/uploads/upl_music/tenca-aghajanyan-fatum-lev-lev-2018.mp3');
-        audio.id = 'demo'
         console.log('Гидеон: Плеер включён')
           gideon.say('Плеер включён',"Russian Male")
       },
@@ -227,31 +235,25 @@
           console.log('да я такая')
           gideon.say('да я такой')
       },
-      'найди в интернете *':(data)=>{
-        if (data.length > 0){
-          window.open("http://www.google.com/search?q="+ encodeURIComponent(data[0]))
-          gideon.say('найдены следующие результаты по запросу,'+data[0])
+      'поиск*':(teg)=>{
+        if (teg.length > 0){
+          window.open("http://www.google.com/search?q="+ encodeURIComponent(teg))
+          gideon.say('найдены следующие результаты по запросу,'+teg)
         }else{
           gideon.say('команда не выполнена.пожалуйста,введите ключевые слова для поиска')
         }
       },
-      'привет * я *':(data)=>{
-        gideon.say(`здравствуй ${data[1]} я ${data[0]}`)
-      },
       'спокойной ночи||гидеон спокойной ночи||спокойной ночи гидеон':()=>{
         gideon.say('спокойной ночи сэр')
-      },
-      'молодец||а ты молодец':()=>{
-        gideon.say('стараюсь сэр')
       }
   }
 
-// console.log(comands)
+
+
+  // gideon.gideon_test(comands,'поиск я из армении');
+
+
   gideon.SetComands(comands)
-
-
-  // gideon.gideon_test(comands,'gideon hello my name is poxosik im from russia');
-  // gideon.gideon_test(comands,'привет гидеон я артем');
 
 
 
@@ -259,6 +261,7 @@
 // $(document).ready(function(){
   //   $('body').append('<div class="voice_comand_block"><canvas id="canvas"></canvas></div>');
 // })
+//
 // // recognition.onstart = function() { ... }
 // // recognition.onresult = function(event) { ... }
 // // recognition.onerror = function(event) { ... }
@@ -270,10 +273,15 @@
 //
 
 
+
+
+
   HTMLAudioElement.prototype.stop = function(){
      this.pause();
      this.currentTime = 0.0;
   }
+
+
 
     var get_following_request = function(){
       if($('.cancel_following_btn').length >  0){

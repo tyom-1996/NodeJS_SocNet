@@ -45,7 +45,11 @@ function Gideon(){
       this.recognition.interimResults = true;
       this.recognition.start()
       console.log(this.recognition)
-
+    // recognition.onaudioend = ()=>{
+    //     console.log(1)
+    //     recognition.stop();
+    //     console.log('micrafon of')
+    // }
       this.recognition.onend = ()=>{
         this.interval = setInterval(()=>{
           if (this.speak){
@@ -67,11 +71,6 @@ function Gideon(){
 
 
   this.SetComands = (comands)=>{
-    comands = comands ? comands : {}
-
-
-    this.defoltComands(comands)
-
     this.recognition.onresult = (event) => {
           this.interimTranscript = '';
           for (i = event.resultIndex, len = event.results.length; i < len; i++) {
@@ -91,9 +90,6 @@ function Gideon(){
           console.log(this.interimTranscript)
     }
   }
-
-
-
 
 
 
@@ -121,98 +117,24 @@ function Gideon(){
       //------many teg
 
         else{
-            if(key.split('*').length > 1){
-              this.diff  =  JsDiff.diffChars(key,my_comand);
-              this.data = []
-              this.res1 = '';
-              this.res2 = '';
-              this.keyfirstWord = key.replace(/ .*/,'');
-              this.mycomandfirstWord = my_comand.replace(/ .*/,'');
+            this.search_comands_arr = key.split('*')
+
+            if(this.search_comands_arr.length > 1){
+
+                if (my_comand.indexOf(this.search_comands_arr[0]+' ') != -1){
+                  this.search_query = my_comand.replace(this.search_comands_arr[0],'');
+                  this.recognition.stop()
+                  comands[key](this.search_query);
+                }
 
 
-              for (j = 0; j <this.diff.length; j++) {
-                if (this.diff[j].added != true){
-                  this.res1 += this.diff[j].value;
-                }
-                if (this.diff[j].value != '*'){
-                  this.res2 += this.diff[j].value
-                }
-                if (this.diff[j].added == true){
-                  this.data.push(this.diff[j].value)
-                }
-              }
-
-              if(this.res2 == my_comand && this.mycomandfirstWord == this.keyfirstWord ){
-                this.recognition.stop()
-                comands[key](this.data);
-              }
-            }else{
-              continue
             }
+
+
         }
+
       }
   }
-
-
-
-
-  this.defoltComands = (comands)=>{
-
-    comands['перезагрузить||обновить||обнови страницу||обновить страницу||перезагрузи страницу'] = ()=> {
-      this.say('команда принята обновляю страницу',"Russian Male")
-      console.log('команда принята обновляю страницу')
-      setTimeout(()=>{
-        location.reload()
-      },3000)
-    }
-    comands['открой новую вкладку||открой новое окно'] = ()=>{
-      window.open('https://www.google.com/')
-      this.say('новая вкладка открыта',"Russian Male")
-    }
-
-    comands['сколько будет * * *'] = (data)=>{
-      var number_one,number_two,action
-      if (data.length == 3){
-        if (data[0] == 'пять' || data[0] =='5' ){
-          number_one = '5'
-        } else if(data[0] == 'два' || data[0] =='2' ){
-          number_one = '2'
-        }else{
-          number_one = data[0]
-        }
-        if (data[2] == 'пять' || data[2] =='5' ) {
-          number_two = '5'
-        }else if(data[2] == 'два' || data[2] =='2' ){
-          number_two = '2'
-        }else{
-          number_two = data[2]
-        }
-        if (data[1] == 'x' || data[1] == 'умножить' || data[1] == '*' || data[1] == 'умножить на '){
-          action = '*';
-        }else if (data[1] == 'делить' || data[1] == 'разделить' || data[1] == '/'){
-          action = '/';
-        }else if (data[1] == 'плюс' || data[1] == '+'){
-          action = '+';
-        }else if (data[1] == 'минус' || data[1] == '-'){
-          action = '-';
-        }else{
-          action = '*';
-        }
-        try {
-          let result = `${number_one} ${action} ${number_two}`.replace(/D/g, '');
-          this.say('результат'+eval(result))
-        } catch (err) {
-          this.say('не могли бы вы говорить более четко')
-        }
-      }
-    }
-
-
-
-  }
-
-
-
 
 
 
