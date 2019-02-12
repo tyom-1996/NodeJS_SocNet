@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="642dab5e-960a-4474-9571-2d5e62193284" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/voice_assistant/diff.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/voice_assistant/gideon.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/voice_assistant/gideon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/voice_assistant/voice_assistant.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/voice_assistant/voice_assistant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/include/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/include/header.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/include/jarvis.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/include/jarvis.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login_page.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login_page.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +57,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/voice_assistant/voice_assistant.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="42">
@@ -72,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/voice_assistant/gideon.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="40" column="64" lean-forward="true" selection-end-line="243" selection-end-column="2" />
+            <state relative-caret-position="156">
+              <caret line="173" column="46" selection-start-line="173" selection-start-column="31" selection-end-line="173" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -143,15 +137,15 @@
         <option value="$PROJECT_DIR$/views/include/jarvis.ejs" />
         <option value="$PROJECT_DIR$/public/js/voice_assistant — копия/gideon.js" />
         <option value="$PROJECT_DIR$/public/js/voice_assistant/diff.js" />
-        <option value="$PROJECT_DIR$/public/js/voice_assistant/gideon.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/public/js/voice_assistant/voice_assistant.js" />
         <option value="$PROJECT_DIR$/views/login_page.ejs" />
         <option value="$PROJECT_DIR$/views/include/header.ejs" />
+        <option value="$PROJECT_DIR$/public/js/voice_assistant/gideon.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="557" />
     <option name="y" value="-26" />
     <option name="width" value="461" />
@@ -217,7 +211,7 @@
       <workItem from="1549516980924" duration="5918000" />
       <workItem from="1549616583819" duration="2393000" />
       <workItem from="1549624986544" duration="11401000" />
-      <workItem from="1549644931036" duration="50584000" />
+      <workItem from="1549644931036" duration="52537000" />
     </task>
     <task id="LOCAL-00001" summary="hello">
       <created>1549517850477</created>
@@ -230,11 +224,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="206312000" />
+    <option name="totallyTimeSpent" value="208265000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1785174" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -251,7 +244,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.29623568" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3584288" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -535,13 +528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/voice_assistant/gideon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="40" column="64" lean-forward="true" selection-end-line="243" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/voice_assistant/diff.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -560,6 +546,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="211" column="48" lean-forward="true" selection-start-line="211" selection-start-column="48" selection-end-line="211" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/voice_assistant/gideon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="173" column="46" selection-start-line="173" selection-start-column="31" selection-end-line="173" selection-end-column="46" />
         </state>
       </provider>
     </entry>

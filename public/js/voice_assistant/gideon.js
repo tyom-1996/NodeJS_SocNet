@@ -170,6 +170,10 @@ function Gideon(){
       this.say('новая вкладка открыта',"Russian Male")
     }
 
+    comands["кто твой создатель"] = ()=>{
+      this.say("Мой создатель, артём арменович")
+    }
+
     comands['сколько будет * * *'] = (data)=>{
       var number_one,number_two,action
       if (data.length == 3){
