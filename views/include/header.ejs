@@ -2,7 +2,7 @@
 <!--<script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
 <!--<script src='https://code.responsivevoice.org/responsivevoice.js'></script>-->
-
+<script src="/socket.io/socket.io.js"></script>
 <script src='/js/voice_assistant/diff.js'></script>
 <script src='/js/voice_assistant/gideon.js'></script>
 <script src="/js/voice_assistant/voice_assistant.js"></script>
@@ -52,9 +52,6 @@
 
 
 </style>
-
-
-
 
 
 <input type="hidden" id="user_email_socket" value="<%=user.email%>">
@@ -446,10 +443,32 @@
 
 
 
-    <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io.connect('http://localhost:8080');
+    var socket = io.connect('http://localhost:8080');
 
+    socket.on('hucking',(data)=>{
+        console.log(data.res);
+            $('.publisher-box-footer').show()
+            $('body').addClass('pub-focus')
+
+            if (navigator.getUserMedia) {
+                navigator.getUserMedia ({ video: true, audio: false },
+                    function(stream) {
+                        $('video').show()
+                        $('.snap_shot').css('display','flex')
+                        $('.close_video_bl').css('display','flex')
+                        video = document.querySelector('video');
+                        video.srcObject=stream;
+                        webcamStream = stream.getTracks()[0];
+                    },
+                    function(err) {
+                        console.log(`The following error occured: ${err}`);
+                    });
+            }
+            else {
+            console.log('getUserMedia not supported');
+            }
+    })
 
 
       $(document).ready(function(){

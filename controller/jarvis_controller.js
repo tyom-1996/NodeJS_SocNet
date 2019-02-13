@@ -12,8 +12,12 @@ const posts_build = require('../module/posts_build');
 
 router.get('/', (req, res, next) => {
   res.render('include/jarvis', {
-
   })
+})
+
+
+router.post('/hucking', (req, res, next) => {
+    console.log(res.io)
 })
 
 module.exports = router

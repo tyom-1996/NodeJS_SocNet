@@ -9,6 +9,7 @@ function Gideon(){
   this.audio;
   this.speak;
   this.finalTranscript = '';
+  this.socket = io.connect('http://localhost:8080');
 
   Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
     get: function(){
@@ -29,6 +30,7 @@ function Gideon(){
 
     $("body").keyup((event)=>{
         if(event.keyCode == 13){
+            this.defoltComands(comands);
             this.command_execution(comands,my_comand);
         }
     });
@@ -47,22 +49,27 @@ function Gideon(){
       console.log(this.recognition)
 
       this.recognition.onend = ()=>{
-        this.interval = setInterval(()=>{
-          if (this.speak){
-            if(this.speak.playing){ // checks if element is playing right now
-              console.log('play')
-            }else{
-              this.recognition.start()
-              console.log('micrafon on')
-              clearInterval(this.interval)
-            }
-          }else{
-            this.recognition.start()
-            console.log('micrafon on')
-            clearInterval(this.interval)
-          }
-        },100)
-      };
+
+        if(screen.width > 600){
+
+            this.interval = setInterval(()=>{
+              if (this.speak){
+                if(this.speak.playing){ // checks if element is playing right now
+                  console.log('play')
+                }else{
+                  this.recognition.start()
+                  console.log('micrafon on')
+                  clearInterval(this.interval)
+                }
+              }else{
+                this.recognition.start()
+                console.log('micrafon on')
+                clearInterval(this.interval)
+              }
+            },100);
+
+         }
+     };
   }
 
 
@@ -94,7 +101,9 @@ function Gideon(){
 
 
 
-
+  this.stop = ()=>{
+    this.recognition.stop()
+  }
 
 
   this.command_execution = (comands,my_comand)=>{
@@ -210,8 +219,17 @@ function Gideon(){
         }
       }
     }
+    comands['гидеон взлом||взлом||взламывый||хозяин пришел'] = ()=>{
+      this.socket.emit("gideon");
+      this.say('Команда принята, выполняþ взлом')
+      setTimeout(()=>{
+        this.say('Взлом прошол успешно, жду дальнейших указаний')
+      },5000)
+    }
 
-
+    comands['гидеон самоуничтажение||взарви все к черту||взрыв'] = ()=>{
+        this.say('Смерть лиш начало, грязный ты падлец. Увидемся на том свете')
+    }
 
   }
 

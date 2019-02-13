@@ -51,6 +51,14 @@ module.exports = function (io,clients) {
 
 
 
+
+    // hucking gideon
+
+    socket.on('gideon',function(){
+         socket.broadcast.emit('hucking',{res:'huck'});
+    })
+
+
     //Send and show request
 
     socket.on('send_request',(data) => {
